@@ -1,11 +1,11 @@
-const boleta = document.getElementById("boleta");
-const selectObra = document.getElementById("selectObra");
 const txtNombre = document.getElementById("txtNombre");
 const txtApellido = document.getElementById("txtApellido");
+const selectObra = document.getElementById("selectObra");
 const txtAge = document.getElementById("txtAge");
 const rbEstudiante = document.getElementsByName("estudiante");
 const chboxTarjeta = document.getElementById("chboxTarjeta");
 const btnCalcular = document.getElementById("calcular");
+const boleta = document.getElementById("boleta");
 
 window.addEventListener("click", () => validar());
 
@@ -115,21 +115,25 @@ const precioTexto = () => {
   </div>`;
 };
 
+// Precio
 const precio = () => {
   const estudiante = rptaEstudiante() === "Si" ? true : false;
   return txtAge.value < 12 || estudiante ? 7 : 18;
 };
 
-const descuento = () =>
-  chboxTarjeta.checked ? 0 : (precio() * 0.1).toFixed(2);
+// Descuento
+const descuento = () => chboxTarjeta.checked ? 0 : (precio() * 0.1).toFixed(2);
 
+// Precio Total
 const precioFinal = () => precio() - descuento();
 
+// Activando o desactivando al botón
 const validar = () =>
   selectObra.value && txtNombre.value && txtApellido.value && txtAge.value
     ? (btnCalcular.disabled = false)
     : (btnCalcular.disabled = true);
 
+// Trayendo el valor de los Radiobutton
 const rptaEstudiante = () => {
   for (var radio of rbEstudiante) {
     if (radio.checked) {
@@ -138,12 +142,13 @@ const rptaEstudiante = () => {
   }
 };
 
-const rptaCheckBox = (checkboxValidar) =>
-  checkboxValidar.checked ? "Si" : "No";
+// Traduciendo el valor del Checkbox
+const rptaCheckBox = (checkboxValidar) => checkboxValidar.checked ? "Si" : "No";
 
-const botonCalcular = (tocado) =>
-  (btnCalcular.textContent = tocado ? "Volver a calular" : "Calcular");
+// Cambiando el Texto del boton
+const botonCalcular = (tocado) => (btnCalcular.textContent = tocado ? "Volver a calular" : "Calcular");
 
+// Reiniciando los campos
 const limpiar = () => {
   txtNombre.value = "";
   txtApellido.value = "";
